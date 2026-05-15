@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Combustível</title>
+</head>
+<body>
+    <form name="formulario">
+        <label for="etanol">Etanol:</label>
+        <input type="number" id="etanol" name="etanol" step="0.01">
+        <br><br>
+        <label for="gasolina">Gasolina:</label>
+        <input type="number" id="gasolina" name="gasolina" step="0.01">
+        <br><br>
+        <input type="button" value="Calcular" onclick="calcular()">
+    </form>
+    <p id="mensagem"></p>
+    <img id="status" src="../projeto-combustivel/img/tanque.png" alt="Status">
+
+    <script>
+        function calcular() {
+            let etanol = parseFloat(document.getElementById('etanol').value);
+            let gasolina = parseFloat(document.getElementById('gasolina').value);     
+
+            let resultado = etanol / gasolina; // Calcular o valor
+
+            if (etanol <= 0.70 * gasolina) {
+                document.getElementById('status').src = "../projeto-combustivel/img/tanqueEtanol.png";
+            } else {
+                document.getElementById('status').src = "../projeto-combustivel/img/tanqueGasolina.png";
+            }
+
+            document.getElementById("mensagem").innerHTML = `Resultado: ${resultado.toFixed(2)}`;
+        }
+
+        function limpar() {
+            document.getElementById('status').src= '../projeto-combustivel/img/tanque.png';
+            document.getElementById('mensagem').innerHTML= '';
+            document.getElementById('etanol').value= '';
+            document.getElementById('gasolina').value= '';
+        }
+    </script>
+</body>
+</html>

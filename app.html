@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../projeto-combustivel/css/reset.css"> -->
+    <link rel="stylesheet" href="./css/app.css">
+    <script src="./app.js" defer></script> 
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">  
+    <title>Gasolina|Etanol</title>
+</head>
+<body>
+<div class="container"> 
+    <form action="" id="formulario">        
+        <label for="combustivel">COMBUSTÍVEL:</label>      
+
+        <input type="number" name="etanol" id="etanol" placeholder="Etanol" step="0.01"> <!--Permite que o usuário insira valores com duas casas decimais, comum para preços -->       
+        <input type="number" name="gasolina" id="gasolina" placeholder="Gasolina" step="0.01">        
+
+        <input type="button" value="CALCULAR" onclick="calcular()">
+        <input type="reset" value="LIMPAR" onclick="limpar()">   
+    </form>
+
+    <img src="./img/tanque.png" alt="tanque-combustivel" class="img-tanque" id="status">
+    <p id="mensagem">Resultado: </p>
+</div>
+    
+</body>
+</html>
