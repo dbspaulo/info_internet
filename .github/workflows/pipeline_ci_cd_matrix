@@ -1,0 +1,37 @@
+name: 03 - Pipeline Full CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # ETAPA 1: CI (Build e Validação)
+  build_and_test:
+    name: Testar em ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest] # Demonstra multiplataforma
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar integridade
+        run: echo "Validando arquivos no ${{ matrix.os }}..."
+
+  # ETAPA 2: CD (Deploy - Só executa se o CI acima passar)
+  deploy:
+    name: Deploy Produção
+    needs: build_and_test # Só rodar se finalizar com sucesso. Ele força o job atual a esperar 
+    runs-on: ubuntu-latest
+    environment: production # Ativa a pausa para aprovação manual
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v4
