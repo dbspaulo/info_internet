@@ -1,0 +1,19 @@
+name: 01 - CI - Validar HTML
+
+on:
+  push:
+    paths:
+      - "*.html"
+
+jobs:
+  validar-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar se existe index.html
+        run: |
+          if [ ! -f index.html ]; then
+            echo "Erro: index.html ausente!"
+            exit 1
+          fi
+          echo "Sucesso: index.html presente!"
